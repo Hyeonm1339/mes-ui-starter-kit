@@ -1,8 +1,8 @@
-# MES App — 스캐폴드
+# MES UI Starter Kit
 
-MES(제조 실행 시스템) 개발을 위한 기반 프로젝트입니다.  
+MES(제조 실행 시스템) 개발을 위한 스캐폴드 프로젝트입니다.  
 공통 UI 컴포넌트는 `@hyeonm1339/mes-ui-kit` 패키지로 제공되며,  
-이 프로젝트는 레이아웃, 라우터, 상태관리 등 앱 인프라만 포함합니다.
+이 프로젝트는 레이아웃, 라우터, 상태관리 등 앱 인프라와 예제 페이지를 포함합니다.
 
 ---
 
@@ -42,6 +42,18 @@ npm run dev
 
 ---
 
+## 포함된 예제 페이지
+
+| 경로 | 설명 |
+|---|---|
+| `/dev/design-tokens` | 디자인 토큰 편집기 (CSS 변수 실시간 수정 및 내보내기) |
+| `/samples/page/login` | 로그인 / 비밀번호 변경 페이지 예시 |
+| `/samples/display/chart` | 막대 · 라인 · 영역 · 파이 · 복합 · 방사형 차트 예시 |
+| `/samples/page/search-layout` | 조회 조건 + 데이터 그리드 레이아웃 예시 |
+| `/samples/pop/work-order` | POP(현장용) 작업지시 실행 화면 예시 |
+
+---
+
 ## 새 기능 추가 절차
 
 ### 1. 피처 폴더 생성
@@ -61,6 +73,7 @@ cp -r src/features/_template src/features/<기능명>
 ```ts
 import { page } from '@hyeonm1339/mes-ui-kit'
 
+// navItems 배열에 항목 추가
 {
   label: 'nav.workOrder',
   children: [
@@ -123,21 +136,23 @@ src/
 │   └── toast.ts               # 토스트 헬퍼
 │
 ├── pages/
-│   └── LoginPage.tsx
-│
-├── components/common/
-│   ├── TabBar.tsx             # 탭 네비게이션 (store 의존)
-│   └── PrivateRoute.tsx       # 인증 가드 (store 의존)
+│   ├── LoginPage.tsx          # 실제 로그인 페이지
+│   └── samples/               # 예제 페이지
+│       ├── page/              # 로그인 · 조회 레이아웃 예시
+│       ├── display/           # 차트 예시
+│       └── pop/               # POP 레이아웃 예시
 │
 ├── features/
-│   └── _template/             # 새 기능 추가 시 복사 기준
-│       ├── api/               # API 호출 함수
-│       ├── components/        # View 컴포넌트
-│       ├── hooks/             # 비즈니스 로직 훅
-│       ├── pages/             # 라우팅 진입점
-│       ├── queries/           # React Query 키 팩토리
-│       ├── schemas/           # Zod 유효성 검사
-│       └── types/             # 피처 전용 타입
+│   ├── _template/             # 새 기능 추가 시 복사 기준
+│   │   ├── api/               # API 호출 함수
+│   │   ├── components/        # View 컴포넌트
+│   │   ├── hooks/             # 비즈니스 로직 훅
+│   │   ├── pages/             # 라우팅 진입점
+│   │   ├── queries/           # React Query 키 팩토리
+│   │   ├── schemas/           # Zod 유효성 검사
+│   │   └── types/             # 피처 전용 타입
+│   │
+│   └── design-tokens/         # 디자인 토큰 편집기
 │
 └── locales/
     ├── ko/common.json         # 한국어 번역
@@ -155,10 +170,18 @@ import {
   AppInput,
   AppButton,
   AppSelect,
-  AppTable,
+  AppDataGrid,
   AppSection,
   AppDatePicker,
-  // ...
+  AppPageLayout,
+  AppForm,
+  // POP 컴포넌트
+  PopButton,
+  PopCard,
+  PopTable,
+  // 유틸
+  cn,
+  page,
 } from '@hyeonm1339/mes-ui-kit'
 ```
 
@@ -204,6 +227,8 @@ export const themeOverrideCss = `
   }
 `
 ```
+
+또는 `/dev/design-tokens` 페이지에서 UI로 편집 후 JSON/CSS로 내보내기 할 수 있습니다.
 
 ---
 
