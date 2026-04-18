@@ -114,7 +114,8 @@
       "card": "Card",
       "table": "Table (General)",
       "tableTokens": "Table·Grid Tokens",
-      "chart": "Chart Palette"
+      "chart": "Chart Palette",
+      "chartPreview": "Chart"
     },
     "ui": {
       "breadcrumb1": "Production",

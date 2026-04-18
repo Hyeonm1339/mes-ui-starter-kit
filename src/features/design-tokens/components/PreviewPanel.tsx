@@ -1,6 +1,15 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AppBadge, AppButton, AppCard, AppInput, AppSwitch } from '@hyeonm1339/mes-ui-kit'
+import { AppBadge, AppButton, AppCard, AppInput, AppSwitch, AppBarChart } from '@hyeonm1339/mes-ui-kit'
+
+const CHART_DATA = [
+  { month: '1월', production: 1200, defect: 32, rate: 97 },
+  { month: '2월', production: 1350, defect: 28, rate: 98 },
+  { month: '3월', production: 1180, defect: 41, rate: 96 },
+  { month: '4월', production: 1420, defect: 22, rate: 98 },
+  { month: '5월', production: 1560, defect: 35, rate: 98 },
+  { month: '6월', production: 1490, defect: 19, rate: 99 },
+]
 
 const ZOOM_OPTIONS = [0.8, 1, 1.2] as const
 type ZoomScale = (typeof ZOOM_OPTIONS)[number]
@@ -165,6 +174,22 @@ export const PreviewPanel = () => {
                   <div className="font-mono text-[10px] text-muted-foreground">chart-{i}</div>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Chart Preview */}
+          <section className="space-y-1">
+            <div className="text-xs font-semibold text-muted-foreground">{t('preview.sections.chartPreview')}</div>
+            <div className="rounded-md border border-border bg-card p-3">
+              <AppBarChart
+                data={CHART_DATA}
+                series={[
+                  { key: 'production', label: '생산량' },
+                  { key: 'defect', label: '불량 수' },
+                ]}
+                xKey="month"
+                height={200}
+              />
             </div>
           </section>
         </div>

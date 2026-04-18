@@ -8,6 +8,7 @@ import { I18nProvider } from '@/lib/i18n'
 import { ThemeProvider } from '@/lib/theme'
 import { ZoomProvider } from '@/lib/zoom'
 import App from './App'
+import '@hyeonm1339/mes-ui-kit/lib/style.css'
 import './index.css'
 import { installThemeOverride } from '@/lib/themeOverride'
 

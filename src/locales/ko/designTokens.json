@@ -114,7 +114,8 @@
       "card": "Card",
       "table": "Table (일반)",
       "tableTokens": "Table·Grid 토큰",
-      "chart": "Chart Palette"
+      "chart": "Chart Palette",
+      "chartPreview": "Chart"
     },
     "ui": {
       "breadcrumb1": "생산관리",
