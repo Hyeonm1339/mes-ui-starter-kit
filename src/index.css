@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@source "../node_modules/@hyeonm1339/mes-ui-kit/lib/index.js";
 @import 'pretendard/dist/web/variable/pretendardvariable.css';
 @import 'd2coding/d2coding-subset.css';
 
