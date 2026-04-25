@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import {
   LogOut,
   User,
@@ -14,9 +15,12 @@ import {
   PanelTop,
   Menu,
 } from 'lucide-react'
+import { AppAlertDialog } from '@hyeonm1339/mes-ui-kit'
+import { AlarmBell } from '@/features/alarm/components'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { clearCredentials } from '@/store/slices/authSlice'
+import { logoutApi } from '@/features/auth/api/login'
 import { setActiveTab } from '@/store/slices/tabSlice'
 import { useBreadcrumb } from '@/hooks/useBreadcrumb'
 import { useTheme } from '@/lib/theme'
@@ -44,9 +48,12 @@ export const Header = ({
   const { theme, toggleTheme } = useTheme()
   const { getZoom, zoomIn, zoomOut, resetZoom } = useZoom()
   const activeTabPath = useAppSelector((state) => state.tab.activeTabPath)
+  const [logoutOpen, setLogoutOpen] = useState(false)
 
   const handleLogout = () => {
+    const userId = user?.userId
     dispatch(clearCredentials())
+    if (userId) logoutApi(userId).catch(() => {})
   }
 
   const handleHome = () => {
@@ -175,23 +182,36 @@ export const Header = ({
           {i18n.language === 'ko' ? 'EN' : 'KO'}
         </button>
 
+        {/* 알람 */}
+        <AlarmBell />
+
         <div className="mx-2 h-4 w-px bg-header-foreground/20" />
 
         {/* 사용자 */}
         <div className="flex items-center gap-2 text-sm text-header-foreground/70">
           <User className="h-4 w-4" />
-          <span className="hidden sm:inline">{user?.name}</span>
+          <span className="hidden sm:inline">{user?.userName}</span>
         </div>
 
         {/* 로그아웃 */}
         <button
-          onClick={handleLogout}
+          onClick={() => setLogoutOpen(true)}
           className="flex h-8 w-8 sm:w-auto items-center justify-center gap-1 rounded-md sm:px-2 py-1 text-sm text-header-foreground/70 hover:bg-header-foreground/10 hover:text-header-foreground transition-colors"
           title={t('auth.logout')}
         >
           <LogOut className="h-4 w-4" />
           <span className="hidden sm:inline">{t('auth.logout')}</span>
         </button>
+
+        <AppAlertDialog
+          open={logoutOpen}
+          title="로그아웃"
+          description="로그아웃 하시겠습니까?"
+          confirmLabel="로그아웃"
+          cancelLabel="취소"
+          onClose={() => setLogoutOpen(false)}
+          onConfirm={handleLogout}
+        />
       </div>
     </header>
   )

@@ -1,5 +1,8 @@
 {
   "nav": {
+    "userManagement": "User Management",
+    "user": "User",
+    "userList": "Member Management",
     "devTools": "Dev Tools",
     "design": "Design",
     "designTokens": "Design Tokens",

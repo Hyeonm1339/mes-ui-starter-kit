@@ -1,7 +1,7 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios'
 import { toast } from './toast'
 import { store } from '@/store'
-import { clearCredentials, setCredentials } from '@/store/slices/authSlice'
+import { clearCredentials, updateAccessToken } from '@/store/slices/authSlice'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api'
 
@@ -42,7 +42,8 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    const isAuthEndpoint = originalRequest.url?.startsWith('/auth/')
+    if (error.response?.status === 401 && !originalRequest._retry && !isAuthEndpoint) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject })
@@ -56,9 +57,15 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true
 
       try {
-        const response = await axios.post(`${BASE_URL}/auth/refresh`, {}, { withCredentials: true })
-        const { accessToken, user } = response.data
-        store.dispatch(setCredentials({ accessToken, user }))
+        const refreshToken = store.getState().auth.refreshToken
+        if (!refreshToken) throw new Error('No refresh token')
+        const response = await axios.post(
+          `${BASE_URL}/auth/refresh`,
+          null,
+          { params: { refreshToken } },
+        )
+        const accessToken: string = response.data.data.accessToken
+        store.dispatch(updateAccessToken(accessToken))
         processQueue(null, accessToken)
         originalRequest.headers.Authorization = `Bearer ${accessToken}`
         return axiosInstance(originalRequest)

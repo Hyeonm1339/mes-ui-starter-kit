@@ -124,7 +124,7 @@ export const TokenEditorView = () => {
       {/* 액션 바 */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-card px-3 py-2">
         <div className="flex items-center gap-2">
-          <div className="text-sm font-semibold text-card-foreground">{t('title')}</div>
+          <div className="text-sm font-semibold text-card-foreground">{t('title') ?? '디자인 토큰 편집기'}</div>
           <select
             value={selectedPresetId}
             onChange={(e) => handlePresetChange(e.target.value)}
