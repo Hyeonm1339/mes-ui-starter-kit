@@ -3,7 +3,7 @@ import { page } from '@hyeonm1339/mes-ui-kit'
 
 export const userNav: NavLevel2[] = [
   {
-    label: 'nav.user',
+    label: 'nav.systemAccess',
     children: [
       {
         label: 'nav.userList',

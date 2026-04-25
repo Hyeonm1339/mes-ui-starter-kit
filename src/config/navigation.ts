@@ -1,4 +1,4 @@
-import { Palette, LayoutTemplate, Users } from 'lucide-react'
+import { Palette, LayoutTemplate, Settings2 } from 'lucide-react'
 import type { NavLevel1 } from '@hyeonm1339/mes-ui-kit'
 import { devToolsNav } from './nav/dev-tools'
 import { samplePagesNav } from './nav/sample-pages'
@@ -21,6 +21,6 @@ const devNavItems: NavLevel1[] = import.meta.env.DEV
 //   2. src/config/nav/<domain>.ts 파일에 NavLevel2 배열 추가
 //   3. 아래 navItems 배열에 NavLevel1 항목으로 조립
 export const navItems: NavLevel1[] = [
-  { label: 'nav.userManagement', icon: Users, children: userNav },
+  { label: 'nav.systemOperation', icon: Settings2, children: userNav },
   ...devNavItems,
 ]

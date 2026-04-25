@@ -1,8 +1,8 @@
 {
   "nav": {
-    "userManagement": "User Management",
-    "user": "User",
-    "userList": "Member Management",
+    "systemOperation": "System Operation",
+    "systemAccess": "System Access",
+    "userList": "User Management",
     "devTools": "Dev Tools",
     "design": "Design",
     "designTokens": "Design Tokens",

@@ -1,8 +1,8 @@
 {
   "nav": {
-    "userManagement": "사용자관리",
-    "user": "사용자",
-    "userList": "회원관리",
+    "systemOperation": "시스템 운영관리",
+    "systemAccess": "시스템 접근관리",
+    "userList": "사용자 관리",
     "devTools": "개발 도구",
     "design": "디자인",
     "designTokens": "디자인 토큰",
